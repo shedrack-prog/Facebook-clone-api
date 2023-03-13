@@ -28,19 +28,20 @@ app.use(
     useTempFiles: true,
   })
 );
-app.use(helmet());
-app.use(xss());
-app.use(mongoSanitize());
+// app.use(helmet());
+// app.use(xss());
+// app.use(mongoSanitize());
 
-app.get('/', (req, res) => {
-  res.send('welcome');
-});
 app.use(express.json());
 
 // Routes ---------------------------
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
+
+app.get('/', (req, res) => {
+  res.send('welcome');
+});
 
 // middleware-------------------------------
 app.use(notFoundMiddleware);
