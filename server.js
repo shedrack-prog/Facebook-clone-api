@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 // middleware-------------------------------
-app.use(notFoundMiddleware);
+// app.use(notFoundMiddleware);
 // app.use(errorHandlerMiddleware);
 // readdirSync('./routes').map((r) => app.use('/', require('./routes/' + r)));
 
