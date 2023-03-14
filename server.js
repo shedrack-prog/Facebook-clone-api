@@ -32,6 +32,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 
+app.get('/', () => res.send('Welcome to home page of server'));
 // middleware-------------------------------
 app.use(notFoundMiddleware);
 // app.use(errorHandlerMiddleware);
