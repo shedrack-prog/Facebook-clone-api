@@ -5,6 +5,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
 
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 // Routess---------------------------imports
 import authRouter from './routes/authRoute.js';
 import postRouter from './routes/postRoute.js';
@@ -16,6 +20,7 @@ import errorHandlerMiddleware from './middlewares/error-handler.js';
 
 // dv--------------------------------
 import connectDB from './db/connect.js';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.use(cors());
@@ -26,13 +31,17 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
 // Routes ---------------------------
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+});
 
-app.get('/', (req, res) => res.send('Welcome to home page of server'));
+// app.get('/', (req, res) => res.send('Welcome to home page of server'));
 // middleware-------------------------------
 app.use(notFoundMiddleware);
 // app.use(errorHandlerMiddleware);
