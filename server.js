@@ -1,13 +1,9 @@
 import express from 'express';
-import cors from 'cors';
 import { readdirSync } from 'fs';
 import fileUpload from 'express-fileupload';
 import dotenv from 'dotenv';
 dotenv.config();
-
-import helmet from 'helmet';
-import xss from 'xss-clean';
-import mongoSanitize from 'express-mongo-sanitize';
+import cors from 'cors';
 
 // Routess---------------------------imports
 import authRouter from './routes/authRoute.js';
@@ -28,9 +24,6 @@ app.use(
     useTempFiles: true,
   })
 );
-// app.use(helmet());
-// app.use(xss());
-// app.use(mongoSanitize());
 
 app.use(express.json());
 
@@ -39,12 +32,8 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 
-app.get('/', (req, res) => {
-  res.send('welcome');
-});
-
 // middleware-------------------------------
-// app.use(notFoundMiddleware);
+app.use(notFoundMiddleware);
 // app.use(errorHandlerMiddleware);
 // readdirSync('./routes').map((r) => app.use('/', require('./routes/' + r)));
 
