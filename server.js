@@ -41,7 +41,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
 });
 
-// app.get('/', (req, res) => res.send('Welcome to home page of server'));
+ app.get('/', (req, res) => res.send('Welcome to home page of server'));
 // middleware-------------------------------
 app.use(notFoundMiddleware);
 // app.use(errorHandlerMiddleware);
